@@ -24,7 +24,7 @@
            python create_resume.py
 
        - name: Upload pdf
-         uses: actions/Upload-artifact@v3
+         uses: actions/Upload-artifact@v4
          with:
            name: resume
            path: resume.pdf
