@@ -5,7 +5,7 @@ class ResumePDF(FPDF):
         self.set_font("Helvetica", "B", 16)
         self.cell(0, 10, "Prateek Punetha", ln=True, align="C")
         self.set_font("Helvetica", "", 11)
-        self.cell(0, 8, "Cloud Support Engineer | Linux System Administrator", ln=True, align="C")
+        self.cell(0, 8, "Analyst Trainee", ln=True, align="C")
         self.set_font("Helvetica", "", 9)
         self.cell(0, 6, "Pune, India | hi@prateekpunetha.dev | prateekpunetha.dev | github.com/prateekpunetha", ln=True, align="C")
         self.cell(0, 6, "linkedin.com/in/prateekpunetha", ln=True, align="C")
@@ -44,64 +44,63 @@ class ResumePDF(FPDF):
         self.set_font("Helvetica", "", 10)
         self.write(5, f" {value}\n")
 
-# create pdf
+# --- Create PDF ---
 pdf = ResumePDF()
 pdf.set_margins(left=10, top=10, right=10)
 pdf.add_page()
 
+# --- Summary ---
 pdf.section_title("Summary")
 pdf.section_body(
-    "Self-taught Linux System Administrator and aspiring Cloud Support Engineer with hands-on experience in Linux troubleshooting, AWS services, and scripting. "
-    "Strong problem-solving skills and clear communication ability. Built and deployed projects involving cloud configuration, automation, and customer support simulation."
+    "Analyst Trainee at Cognizant with a passion for Linux system administration, cloud infrastructure, and DevOps automation. "
+    "Hands-on with system support, troubleshooting, and process optimization in enterprise environments. "
+    "Eager to expand expertise in cloud operations, scripting, and CI/CD automation."
 )
 
+# --- Skills ---
 pdf.section_title("Skills")
 pdf.skill_line("Cloud Platforms:", "AWS (EC2, S3, IAM), basic Azure/GCP")
 pdf.skill_line("Operating Systems:", "Linux administration and troubleshooting")
-pdf.skill_line("Networking:", "TCP/IP, DNS, firewall")
+pdf.skill_line("DevOps Tools:", "Git, Docker, NGINX, CI/CD basics")
 pdf.skill_line("Scripting:", "Bash, Python")
-pdf.skill_line("Tools:", "Git, Docker, NGINX, Vim")
-pdf.skill_line("Soft Skills:", "Communication, Customer Support, Problem Solving, Adaptability")
+pdf.skill_line("Networking:", "TCP/IP, DNS, firewall")
+pdf.skill_line("Soft Skills:", "Communication, Problem Solving, Adaptability")
 
-pdf.section_title("Certifications")
+# --- Experience ---
+pdf.section_title("Experience")
 pdf.section_body(
-    "- Introduction to Linux (LFS101) - Linux Foundation"
+    "Analyst Trainee — Cognizant (Aug 2025 – Present)\n"
+    "• Supporting enterprise IT environments through incident resolution, patching, and service operations.\n"
+    "• Collaborating with cross-functional teams to ensure uptime, access control, and system reliability.\n"
+    "• Exposure to automation, monitoring tools, and DevOps workflows within large-scale infrastructure."
 )
 
-pdf.section_title("Education")
-pdf.section_body(
-    "Masters of Computer Applications (MCA), Computer Applications, 2023-2025\n"
-    "Institute of Industrial Computer Management Research (Pune University)\n"
-    "CGPA: 8.30/10\n\n"
-    "Bachelor of Science, Computer Science, 2019-2023\n"
-    "Vivekanand College (Shivaji University)\n"
-    "CGPA: 8.96/10"
-)
-
-pdf.section_title("Cloud Experience")
-pdf.section_body(
-    "* Launched and managed EC2 instances, S3 buckets, IAM roles and policies on AWS\n"
-    "* Simulated customer problems like SSH failures, S3 permission errors, broken nginx setups, and solved them\n"
-    "* Practiced troubleshooting and escalation workflows similar to actual support environments"
-)
-
+# --- Projects ---
 pdf.section_title("Projects")
 pdf.set_font("Helvetica", "B", 10)
 pdf.cell(0, 5, "SysUI", ln=True)
 pdf.set_font("Helvetica", "", 10)
-pdf.section_body("Python-based GUI for Linux sysadmins to simplify process of administrating and implement security hardening measures.")
+pdf.section_body("Python-based GUI for Linux sysadmins to simplify administration and implement security hardening measures.")
 pdf.add_link_line("https://github.com/prateekpunetha/SysUI", "https://github.com/prateekpunetha/SysUI")
 
 pdf.set_font("Helvetica", "B", 10)
 pdf.cell(0, 5, "termux-setup", ln=True)
 pdf.set_font("Helvetica", "", 10)
-pdf.section_body("Bash automation for Termux setup.")
+pdf.section_body("Bash automation script for quick environment setup on Termux.")
 pdf.add_link_line("https://github.com/prateekpunetha/termux-setup", "https://github.com/prateekpunetha/termux-setup")
 
 pdf.set_font("Helvetica", "B", 10)
 pdf.cell(0, 5, "bdaynotifier", ln=True)
 pdf.set_font("Helvetica", "", 10)
-pdf.section_body("Telegram bot written in Playwright to announce birthdays.")
+pdf.section_body("Telegram bot built with Playwright to send automated birthday notifications.")
 pdf.add_link_line("https://github.com/prateekpunetha/bdaynotifier", "https://github.com/prateekpunetha/bdaynotifier")
 
+# --- Education ---
+pdf.section_title("Education")
+pdf.section_body(
+    "Masters of Computer Applications (MCA), 2023–2025 — Pune University\n"
+    "Bachelor of Science in Computer Science, 2019–2023 — Shivaji University"
+)
+
+# --- Save ---
 pdf.output("resume.pdf")
