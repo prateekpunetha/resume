@@ -1,30 +1,35 @@
-  name: Build Resume
+name: Build Resume
 
-  on:
-    push:
-      branches:
-        - main
+on:
+  push:
+    branches:
+      - main
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-      steps:
-       - name: Checkout source
-         uses: actions/checkout@v3
+    permissions:
+      contents: write
 
-       - name: Setup Python
-         uses: actions/setup-python@v4
-         with:
-           python-version: '3.13.5'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
 
-       - name: Install dependencies and build resume
-         run: |
-           pip install -r requirements.txt
-           python create_resume.py
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13.5'
 
-       - name: Upload pdf
-         uses: actions/Upload-artifact@v4
-         with:
-           name: resume
-           path: resume.pdf
+      - name: Install dependencies and build resume
+        run: |
+          pip install -r requirements.txt
+          python create_resume.py
+
+      - name: Commit and push resume.pdf
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "[auto] test: update resume.pdf"
+          file_pattern: resume.pdf
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
