@@ -1,9 +1,9 @@
-  name: Build Resume
+name: Build Resume
 
   on:
     push:
       branches:
-        - main
+        - test
 
   jobs:
     build:
@@ -23,8 +23,10 @@
            pip install -r requirements.txt
            python create_resume.py
 
-       - name: Upload pdf
-         uses: actions/Upload-artifact@v4
+       - name: Commit and push resume.pdf
+         uses: stefanzweifel/git-auto-commit-action@v5
          with:
-           name: resume
-           path: resume.pdf
+           commit_message: "[auto] test: update resume.pdf"
+           file_pattern: resume.pdf
+           commit_user_name: "GitHub Actions Bot"
+           commit_user_email: "actions@github.com"
