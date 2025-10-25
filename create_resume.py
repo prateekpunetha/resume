@@ -4,7 +4,7 @@ class ResumePDF(FPDF):
     def header(self):
         self.set_font("Helvetica", "B", 16)
         self.cell(0, 10, "Prateek Punetha", ln=True, align="C")
-        self.set_font("Helvetica", "", 11)
+        self.set_font("Helvetica", "B", 11)
         self.cell(0, 8, "Analyst Trainee", ln=True, align="C")
         self.set_font("Helvetica", "", 9)
         self.cell(0, 6, "Pune, India | hi@prateekpunetha.dev | prateekpunetha.dev | github.com/prateekpunetha", ln=True, align="C")
@@ -28,7 +28,19 @@ class ResumePDF(FPDF):
     def section_body(self, text):
         self.set_font("Helvetica", "", 10)
         text = text.encode("ascii", "ignore").decode()
-        self.multi_cell(0, 5, text)
+        # Replace text with bold variants for Analyst Trainee and Cognizant
+        if "Analyst Trainee" in text or "Cognizant" in text:
+            parts = text.split(" ")
+            for word in parts:
+                if word.strip(",.") in ["Analyst", "Trainee", "Cognizant"]:
+                    self.set_font("Helvetica", "B", 10)
+                    self.write(5, word + " ")
+                    self.set_font("Helvetica", "", 10)
+                else:
+                    self.write(5, word + " ")
+            self.ln(6)
+        else:
+            self.multi_cell(0, 5, text)
         self.ln(1)
 
     def add_link_line(self, title, url):
@@ -104,3 +116,4 @@ pdf.section_body(
 
 # --- Save ---
 pdf.output("resume.pdf")
+
